@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="age.css">
+    <link rel="icon" href="https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/a2/bc/d6/a2bcd67a-1748-15d9-afd9-5eca5c9ef0e9/AppIcon-1x_U007emarketing-0-7-0-0-85-220-0.png/1200x600wa.png">
+    <title>Age Calculator</title>
+</head>
+<body>
+    
+    <h1>Age Calculator</h1>
+    <div class="vote">
+    <form>
+        <label><b>CURRENT YEAR</b></label><br>
+        <input type="number" id="curr_yr" readonly><br>
+    
+        <label><b>DOB</b></label><br>
+        <input type="number" id="dob" placeholder="Enter your birth year">
+    </form>
+
+    <button onclick="age_calc()">Calculate</button>
+    <p id="age"></p>
+    
+    </div>
+
+    <script>
+
+        document.getElementById("curr_yr").value=new Date().getFullYear();
+        function age_calc(){
+            const curr_yr=parseInt(document.getElementById("curr_yr").value);
+            const dob_yr=parseInt(document.getElementById("dob").value);
+            const output_age= curr_yr - dob_yr;
+            if(!dob_yr || isNaN(dob_yr)){
+                alert("Please enter your birth year")
+                return;
+            }
+            else if(output_age>=0){
+                document.getElementById("age").innerHTML = `<strong>Your age is: ${output_age} years</strong> <br>`;
+                if(output_age>0 && output_age<18){
+                    document.getElementById("age").innerHTML+=`<strong>You are ineligible to vote</strong>`
+                }
+                else{
+                    document.getElementById("age").innerHTML+=`<strong>You have voting eligibility</strong>`
+                }
+            }else{
+                alert("DOB cannot be greater than the current year");
+            }
+        }
+
+    </script>  
+</body>
+</html>
